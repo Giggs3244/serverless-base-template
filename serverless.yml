@@ -38,7 +38,7 @@ custom:
 
 functions:
   hello-world:
-    handler: src/handlers/hello-world/hello-world.handler
+    handler: handlers/hello-world/hello-world.handler
     events:
       - http:
           path: /say-hello
