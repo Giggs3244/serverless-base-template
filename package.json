@@ -1,0 +1,21 @@
+{
+  "name": "serverless-base-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "deploy": "npm run lint && npm run check && serverless deploy --stage dev --region us-east-1",
+    "lint": "eslint . --ext .ts --fix"
+  },
+  "keywords": [],
+  "author": "Giggs3244",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "serverless": "3.38.0",
+    "serverless-esbuild": "1.52.1",
+    "typescript": "5.4.4",
+    "typescript-eslint": "7.2.0"
+  }
+}

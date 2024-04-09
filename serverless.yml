@@ -1,0 +1,45 @@
+service: serverless-base-template
+frameworkVersion: "3"
+
+package:
+  individually: true
+
+plugins:
+  - serverless-esbuild
+  # - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    NODE_OPTIONS: "--enable-source-maps"
+
+params:
+  default:
+    esbuildMinify: true
+    esbuildExclude:
+      - aws-sdk
+  local:
+    esbuildMinify: false
+    esbuildExclude: []
+
+custom:
+  stage: ${opt:stage, 'dev'}
+  esbuild:
+    bundle: true
+    minify: ${param:esbuildMinify}
+    sourcemap: true
+    keepNames: true
+    watch:
+      pattern:
+        - "src/**/*.ts"
+    exclude: ${param:esbuildExclude}
+
+functions:
+  hello-world:
+    handler: src/handlers/hello-world/hello-world.handler
+    events:
+      - http:
+          path: /say-hello
+          method: get
